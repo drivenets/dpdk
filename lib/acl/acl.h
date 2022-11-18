@@ -199,7 +199,8 @@ struct rte_acl_ctx {
 	struct rte_acl_build *build;
 };
 
-void rte_acl_build_free(struct rte_acl_build *build);
+int rte_acl_build_free(struct rte_acl_build *build);
+void rte_acl_build_free_ctx(struct rte_acl_ctx *ctx);
 
 static inline struct rte_acl_build *
 rte_acl_build_lock(struct rte_acl_ctx *ctx)
@@ -217,8 +218,7 @@ rte_acl_build_lock(struct rte_acl_ctx *ctx)
 static inline void
 rte_acl_build_unlock(struct rte_acl_build *build)
 {
-	if (rte_atomic32_dec_and_test(&build->refcnt))
-		rte_acl_build_free(build);
+	rte_acl_build_free(build);
 }
 
 int rte_acl_gen(struct rte_acl_ctx *ctx, struct rte_acl_build *build,

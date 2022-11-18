@@ -3,6 +3,7 @@ DPDK_23 {
 
 	rte_acl_add_rules;
 	rte_acl_build;
+	rte_acl_build_free_ctx;
 	rte_acl_classify;
 	rte_acl_classify_alg;
 	rte_acl_classify_scalar;
