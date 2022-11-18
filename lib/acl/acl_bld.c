@@ -1618,14 +1618,30 @@ rte_acl_build_alloc(struct rte_acl_ctx *ctx)
 	return build;
 }
 
-void
+int
 rte_acl_build_free(struct rte_acl_build *build)
 {
 	if (build == NULL)
+		return 0;
+
+	if (rte_atomic32_dec_and_test(&build->refcnt)) {
+		rte_free(build->mem);
+		build->mem = NULL;
+		rte_free(build);
+		return 1;
+	}
+	return 0;
+}
+
+void
+rte_acl_build_free_ctx(struct rte_acl_ctx *ctx)
+{
+	if (ctx == NULL)
 		return;
 
-	rte_free(build->mem);
-	rte_free(build);
+	if (rte_acl_build_free(ctx->build)) {
+		ctx->build = NULL;
+	}
 }
 
 int
