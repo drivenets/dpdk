@@ -17,6 +17,7 @@ sources = files(
         'sff_8079.c',
         'sff_8472.c',
         'sff_8636.c',
+        'rte_ethdev_netns.c',
 )
 
 headers = files(
@@ -31,6 +32,7 @@ headers = files(
         'rte_mtr_driver.h',
         'rte_tm.h',
         'rte_tm_driver.h',
+        'rte_ethdev_netns.h',
 )
 
 indirect_headers += files(
