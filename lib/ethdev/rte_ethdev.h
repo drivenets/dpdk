@@ -174,6 +174,7 @@ extern "C" {
 
 #include "rte_ethdev_trace_fp.h"
 #include "rte_dev_info.h"
+#include "rte_ethdev_netns.h"
 
 extern int rte_eth_dev_logtype;
 

@@ -14,7 +14,7 @@ sources = files(
         'tap_tcmsgs.c',
 )
 
-deps = ['bus_vdev', 'gso', 'hash']
+deps = ['bus_vdev', 'gso', 'hash', 'rte_ethdev']
 
 cflags += '-DTAP_MAX_QUEUES=16'
 

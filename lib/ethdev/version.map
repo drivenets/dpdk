@@ -135,6 +135,7 @@ DPDK_23 {
 	rte_flow_pick_transfer_proxy;
 	rte_flow_query;
 	rte_flow_validate;
+	rte_ethdev_netns_get;
 
 	local: *;
 };
