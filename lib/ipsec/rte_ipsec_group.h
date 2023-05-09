@@ -97,9 +97,11 @@ rte_ipsec_pkt_crypto_group(const struct rte_crypto_op *cop[],
 		ns = cop[i]->sym[0].session;
 
 		m->ol_flags |= RTE_MBUF_F_RX_SEC_OFFLOAD;
-		if (cop[i]->status != RTE_CRYPTO_OP_STATUS_SUCCESS)
+		if (cop[i]->status != RTE_CRYPTO_OP_STATUS_SUCCESS) {
+			if (cop[i]->status & RTE_CRYPTO_OP_STATUS_AUTH_FAILED)
+				m->dynfield1[0] = RTE_CRYPTO_OP_STATUS_AUTH_FAILED;
 			m->ol_flags |= RTE_MBUF_F_RX_SEC_OFFLOAD_FAILED;
-
+		}
 		/* no valid session found */
 		if (ns == NULL) {
 			dr[k++] = m;

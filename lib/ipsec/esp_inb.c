@@ -388,6 +388,7 @@ esp_inb_pkt_prepare(const struct rte_ipsec_session *ss, struct rte_mbuf *mb[],
 		} else {
 			dr[i - k] = i;
 			rte_errno = -rc;
+			mb[i]->dynfield1[0] = -rc;
 		}
 	}
 
